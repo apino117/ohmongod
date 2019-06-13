@@ -45,7 +45,7 @@ app.set("view engine", "handlebars");
 // =================== ROUTES =================== //
 
 // Routes
-require("./routes/apiRoutes");
+// require("./routes/apiRoutes");
 require("./routes/htmlRoutes")(app);
 
 // A GET route for scraping the website
