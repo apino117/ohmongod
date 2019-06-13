@@ -9,6 +9,8 @@
             * Takes you back to the main screen 
         1. **Saved Articles**
             * Takes you to the saved articles route
+            * Users should also be able to leave comments on the articles displayed and revisit them later. 
+                * The comments should be saved to the database as well and associated with their articles. Users should also be able to delete comments left on articles. All stored comments should be visible to every user.
         1. **Scrape New Articles**
             * Refreshed the page causing another auto-populate which will change the content
         1. **Clear Articles** 
