@@ -44,10 +44,6 @@ app.set("view engine", "handlebars");
 
 // =================== ROUTES =================== //
 
-// Routes
-// require("./routes/apiRoutes");
-require("./routes/htmlRoutes")(app);
-
 // A GET route for scraping the website
 
 // Route for getting all Articles from the db
