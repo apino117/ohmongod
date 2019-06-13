@@ -1,4 +1,5 @@
 var express = require("express");
+var exphbs = require("express-handlebars");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 
@@ -32,7 +33,20 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 
 mongoose.connect(MONGODB_URI);
 
+// Handlebars
+app.engine(
+    "handlebars",
+    exphbs({
+        defaultLayout: "main"
+    })
+);
+app.set("view engine", "handlebars");
+
 // =================== ROUTES =================== //
+
+// Routes
+require("./routes/apiRoutes");
+require("./routes/htmlRoutes")(app);
 
 // A GET route for scraping the website
 
