@@ -46,6 +46,59 @@ app.set("view engine", "handlebars");
 
 // A GET route for scraping the website
 
+app.get("/scrape", function (req, res) {
+    // First, we grab the body of the html with axios
+    axios.get("https://www.cracked.com/humor-music.html").then(function (response) {
+        // Then, we load that into cheerio and save it to $ for a shorthand selector
+        var $ = cheerio.load(response.data);
+
+        var results = [];
+
+        // Select each element in the HTML body from which you want information.
+        // NOTE: Cheerio selectors function similarly to jQuery's selectors,
+        // but be sure to visit the package's npm page to see how it works
+        $("content-card-content").each(function (i, element) {
+
+            var title = $(element).text();
+            var link = $(element).find("a").attr("href");
+
+            // Save these results in an object that we'll push into the results array we defined earlier
+            results.push({
+                title: title,
+                link: link
+            });
+        });
+
+        // Now, we grab every h2 within an article tag, and do the following:
+        // $("content-card-content").each(function (i, element) {
+        //     // Save an empty result object
+        //     var result = {};
+
+        //     // Add the text and href of every link, and save them as properties of the result object
+        //     result.title = $(this)
+        //         .children("a")
+        //         .text();
+        //     result.link = $(this)
+        //         .children("a")
+        //         .attr("href");
+
+        //     // Create a new Article using the `result` object built from scraping
+        //     db.Article.create(result)
+        //         .then(function (dbArticle) {
+        //             // View the added result in the console
+        //             console.log(dbArticle);
+        //         })
+        //         .catch(function (err) {
+        //             // If an error occurred, log it
+        //             console.log(err);
+        //         });
+        // });
+
+        // Send a message to the client
+        res.send("Scrape Complete");
+    });
+});
+
 // Route for getting all Articles from the db
 
 // Route for grabbing a specific Article by id, populate it with it's note
